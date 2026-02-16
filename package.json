@@ -1,0 +1,31 @@
+{
+  "name": "json-to-markdown-file",
+  "version": "1.0.0",
+  "description": "Write JSON files to markdown files.",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AramZS/json-to-markdown.git"
+  },
+  "keywords": [
+    "json",
+    "md",
+    "markdown",
+    "yaml"
+  ],
+  "author": "Aram Zucker-Scharff",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AramZS/json-to-markdown/issues"
+  },
+  "homepage": "https://github.com/AramZS/json-to-markdown#readme",
+  "dependencies": {
+    "gray-matter": "^4.0.3",
+    "slugify": "^1.6.6",
+    "transliteration": "^2.6.1",
+    "urlsafe-base64": "^1.0.0"
+  }
+}
