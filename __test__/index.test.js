@@ -23,7 +23,7 @@ describe('index.js', () => {
     const mockTitleProp = 'title';
     const mockContentProp = 'content';
 
-    describe.only('basic functionality', () => {
+    describe('basic functionality', () => {
       it('should create a markdown file from an object', () => {
         const mockObj = {
           title: 'Test Title',
@@ -151,7 +151,7 @@ describe('index.js', () => {
       });
     });
 
-    describe.only('file existence handling', () => {
+    describe('file existence handling', () => {
       it('should not overwrite if neverOverwrite is true', () => {
         const mockObj = {
           title: 'Test Title',
