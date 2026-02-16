@@ -116,6 +116,8 @@ const writeDataToMarkdown = (
  * @param   {obj}  obj         The object to write
  * @param   {bool}  neverOverwrite True to never
  *                             overwrite an existing file
+ * @param   {bool}  replaceData True to replace existing data with
+ *                              new data passed in.
  *
  * @return  {bool}             True if the file was written
  */
@@ -125,6 +127,7 @@ const processObjectToMarkdown = (
   pathString,
   obj,
   neverOverwrite,
+  replaceData,
 ) => {
   const fileSlug =
     obj.hasOwnProperty('slug') && obj.slug.length > 1
@@ -151,10 +154,14 @@ const processObjectToMarkdown = (
       console.log('Error Reading Existing File', e);
       //return false;
     }
+    let newData = obj;
     const oldData = getYAMLData(oldMarkdown);
     if (oldData) {
       // console.log("Old Data", oldData);
-      const newData = { ...obj, ...oldData.data };
+
+      if (!replaceData) {
+        newData = { ...obj, ...oldData.data };
+      }
       const newContent = oldData.content.length > 3 ? oldData.content : content;
       // Don't touch the file if we don't need to.
       if (

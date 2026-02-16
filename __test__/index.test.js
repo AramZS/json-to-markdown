@@ -640,5 +640,33 @@ Same content`;
         );
       });
     });
+
+    // Test forced overwrite of markdown file data by passing in replaceData = true
+    it('should overwrite existing file data when replaceData is true', () => {
+      const mockObj = {
+        title: 'Test Title',
+        content: 'New Content',
+      };
+
+      const oldMarkdown = '---\ntitle: Test Title\nfoo: bar\n---\nOld Content';
+      fs.existsSync.mockReturnValue(true);
+      fs.readFileSync.mockReturnValue(oldMarkdown);
+      fs.mkdirSync.mockReturnValue(undefined);
+      fs.writeFileSync.mockReturnValue(undefined);
+
+      processObjectToMarkdown(
+        mockTitleProp,
+        mockContentProp,
+        mockPath,
+        mockObj,
+        false,
+        true,
+      );
+
+      expect(fs.writeFileSync).toHaveBeenCalledWith(
+        `${mockPath}/test-title.md`,
+        expect.not.stringContaining('foo: bar'),
+      );
+    });
   });
 });
