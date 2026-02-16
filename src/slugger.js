@@ -1,14 +1,15 @@
 var URLSafeBase64 = require('urlsafe-base64');
 var slugify = require('slugify');
 var tr = require('transliteration');
-module.exports = function (name) {
-  let safeName = name;
+module.exports = function (name, forceTranslit) {
+  let safeName = name.replace(/[\.@_\/\\]+/g, '-');
   let slug = slugify(safeName, {
     lower: true,
     strict: true,
     locale: 'en',
+    trim: true,
   });
-  if (!slug || (slug && !URLSafeBase64.validate(slug))) {
+  if (!slug || (slug && !URLSafeBase64.validate(slug)) || forceTranslit) {
     console.log('name', name, ' with slug ', slug, 'failed validation');
     safeName = tr.transliterate(name);
 
@@ -16,6 +17,7 @@ module.exports = function (name) {
       lower: true,
       strict: true,
       locale: 'en',
+      trim: true,
     });
     //safeName = URLSafeBase64.encode(Buffer.from(name));
     console.log(
@@ -36,6 +38,7 @@ module.exports = function (name) {
       lower: true,
       strict: true,
       locale: 'en',
+      trim: true,
     });
   }
   return slug;
